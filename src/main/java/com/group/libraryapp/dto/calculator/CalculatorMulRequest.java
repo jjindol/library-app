@@ -1,6 +1,6 @@
-package com.group.libraryapp.dto;
+package com.group.libraryapp.dto.calculator;
 
-public class CalculateMulRequest {
+public class CalculatorMulRequest {
 
     private int number1;
 

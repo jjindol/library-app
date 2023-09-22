@@ -1,8 +1,8 @@
-package com.group.libraryapp.controller;
+package com.group.libraryapp.controller.calculator;
 
 
-import com.group.libraryapp.dto.CalculateMulRequest;
-import com.group.libraryapp.dto.CalculatorAddRequest;
+import com.group.libraryapp.dto.calculator.CalculatorMulRequest;
+import com.group.libraryapp.dto.calculator.CalculatorAddRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,16 +16,10 @@ public class CalculatorController {
 
 
     @PostMapping("/multiply") // POST /multiply
-    public int multiplyTwoNumbers(@RequestBody CalculateMulRequest request) {
+    public int multiplyTwoNumbers(@RequestBody CalculatorMulRequest request) {
         return request.getNumber1() * request.getNumber2();
     }
 }
-
-
-
-
-
-
 
 
 
