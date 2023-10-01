@@ -38,6 +38,6 @@ public class UserController {
 
     @PutMapping("/user")
     public void updateUser(@RequestBody UserUpdateRequest request) {
-        String sql = "update user set name = ? where id = ?";
+        String sql = "update user set name = ? where id = ?"; // user 테이블에서 name 값을 특정한 값으로 업데이트
     }
 }
