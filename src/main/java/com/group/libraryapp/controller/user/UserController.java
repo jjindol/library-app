@@ -39,5 +39,12 @@ public class UserController {
     @PutMapping("/user")
     public void updateUser(@RequestBody UserUpdateRequest request) {
         String sql = "update user set name = ? where id = ?"; // user 테이블에서 name 값을 특정한 값으로 업데이트
+        jdbcTemplate.update(sql, request.getName(), request.getId());
+    }
+
+    @DeleteMapping("/user")
+    public void deleteUser(@RequestParam String name) {
+        String sql = "delete from user where name = ?";
+        jdbcTemplate.update(sql, name);
     }
 }
