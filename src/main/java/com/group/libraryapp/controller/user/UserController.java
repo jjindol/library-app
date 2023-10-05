@@ -60,5 +60,4 @@ public class UserController {
         String sql = "delete from user where name = ?";
         jdbcTemplate.update(sql, name);
     }
-
 }
