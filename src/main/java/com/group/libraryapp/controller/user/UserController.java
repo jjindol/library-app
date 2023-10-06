@@ -3,6 +3,7 @@ package com.group.libraryapp.controller.user;
 import com.group.libraryapp.dto.user.UserCreateRequest;
 import com.group.libraryapp.dto.user.UserResponse;
 import com.group.libraryapp.dto.user.UserUpdateRequest;
+import com.group.libraryapp.service.UserService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ public class UserController {
 
 
     private final JdbcTemplate jdbcTemplate; // 선언
+    private final UserService userService = new UserService();
 
     public UserController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -38,14 +40,7 @@ public class UserController {
 
     @PutMapping("/user")
     public void updateUser(@RequestBody UserUpdateRequest request) {
-        String readSql = "select * from user where id = ?";
-        boolean isUserNotExist = jdbcTemplate.query(readSql, (rs, rowNum) -> 0, request.getId()).isEmpty();
-        if (isUserNotExist) {
-            throw new IllegalArgumentException();
-        }
-
-        String sql = "update user set name = ? where id = ?"; // user 테이블에서 name 값을 특정한 값으로 업데이트
-        jdbcTemplate.update(sql, request.getName(), request.getId());
+        userService.updateUser(jdbcTemplate, request);
     }
 
     @DeleteMapping("/user")
