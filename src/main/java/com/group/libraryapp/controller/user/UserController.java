@@ -48,6 +48,7 @@ public class UserController {
 
         String readSql = "select * from user where name = ?";
         boolean isUserNotExist = jdbcTemplate.query(readSql, (rs, rowNum) -> 0, name).isEmpty();
+
         if (isUserNotExist) {
             throw new IllegalArgumentException();
         }
