@@ -57,3 +57,5 @@ public class UserController {
         jdbcTemplate.update(sql, name);
     }
 }
+
+// CONTROLLER 의 삼단분리 필요
