@@ -14,7 +14,7 @@ public class UserService { // 현재 user 의 유무 파악 및 예외 처리
             throw new IllegalArgumentException();
         }
 
-        String sql = "UPDATE USER SET NAME = ? WHERE ID = ?"; // user 테이블에서 name 값을 특정한 값으로 업데이트
+        String sql = "UPDATE USER SET NAME = ? WHERE ID = ?";
         jdbcTemplate.update(sql, request.getName(), request.getId());
     }
 }
