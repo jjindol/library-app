@@ -11,7 +11,7 @@ public class CalculatorAddRequest {
     }
 
     public int getNumber1() {
-        return number1; // number 1을 반환
+        return number1;
     }
 
     public int getNumber2() {
