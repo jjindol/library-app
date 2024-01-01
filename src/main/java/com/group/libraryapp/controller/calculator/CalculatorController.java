@@ -20,17 +20,3 @@ public class CalculatorController {
         return request.getNumber1() * request.getNumber2();
     }
 }
-
-
-
-
-
-
-
-
-// 오류 수정
-
-
-
-// 단축키: ctrl + alt + o : import 문 정리
-// ctrl + w : 단어 영역 지정
