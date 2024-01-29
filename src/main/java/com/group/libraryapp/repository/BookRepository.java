@@ -1,6 +1,11 @@
 package com.group.libraryapp.repository;
 
-public interface BookRepository {
 
-    void saveBook();
+import com.group.libraryapp.domain.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+
+
+
 }
