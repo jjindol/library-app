@@ -2,6 +2,7 @@
 /.gradle/
 /build/
 /build/classes/java/main/
+.idea/
 
 *.yml
 application.yml

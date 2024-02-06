@@ -1,12 +1,20 @@
 package com.group.libraryapp.dto.user;
 
-import lombok.AllArgsConstructor;
+
+import com.group.libraryapp.domain.User;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class UserResponse {
     private long id;
     private String name;
     private Integer age;
+
+    public UserResponse(long id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+
 }
