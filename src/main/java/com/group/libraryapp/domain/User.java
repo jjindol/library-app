@@ -1,14 +1,18 @@
 package com.group.libraryapp.domain;
 
 
+import com.group.libraryapp.dto.user.UserLoanHistory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name = "app_user")
 public class User {
 
     @Id
@@ -20,6 +24,9 @@ public class User {
 
     @Column
     private Integer age;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
 
 
     public User(String name, Integer age) {
