@@ -1,12 +1,10 @@
 package com.group.libraryapp.dto.user;
 
+import com.group.libraryapp.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,15 +15,16 @@ public class UserLoanHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+    @ManyToOne
+    private User user;
 
     private String bookName;
 
     private boolean isReturn;
     // 0이면 대출중, 1이면 반납
 
-    public UserLoanHistory(Long userId, String bookName, boolean isReturn) {
-        this.userId = userId;
+    public UserLoanHistory(User user, String bookName, boolean isReturn) {
+        this.user = user;
         this.bookName = bookName;
         this.isReturn = isReturn;
     }

@@ -42,7 +42,7 @@ public class BookService {
                 .orElseThrow(IllegalArgumentException::new);
 
         // 유저,책 정보를 기반으로 UserLoanHistory에 저장
-        userLoanHistoryRepository.save(new UserLoanHistory(user.getId(), book.getName(), false));
+        userLoanHistoryRepository.save(new UserLoanHistory(user, book.getName(), false));
 
     }
 
