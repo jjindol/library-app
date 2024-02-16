@@ -1,7 +1,6 @@
 package com.group.libraryapp.dto.user;
 
 
-import com.group.libraryapp.domain.User;
 import lombok.Getter;
 
 @Getter
