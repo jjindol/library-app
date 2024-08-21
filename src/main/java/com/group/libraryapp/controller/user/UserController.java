@@ -1,9 +1,10 @@
 package com.group.libraryapp.controller.user;
 
-import com.group.libraryapp.dto.user.UserCreateReq;
-import com.group.libraryapp.dto.user.UserResponse;
-import com.group.libraryapp.dto.user.UserUpdateReq;
-import com.group.libraryapp.service.UserServiceV2;
+import com.group.libraryapp.dto.request.UserCreateRequest;
+import com.group.libraryapp.dto.request.UserUpdateRequest;
+import com.group.libraryapp.dto.response.UserResponse;
+import com.group.libraryapp.service.UserService;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,31 +12,32 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserServiceV2 userService;
+    private final UserService userService;
 
-    public UserController(UserServiceV2 userService) {
-        this.userService = userService;
+    public UserController(JdbcTemplate jdbcTemplate) {
+        this.userService = new UserService(jdbcTemplate);
     }
 
-    @PostMapping("/user") // user 생성
-    public void saveUser(@RequestBody UserCreateReq request) {
+    @PostMapping("/user")
+    public void saveUser(@RequestBody UserCreateRequest request) {
         userService.saveUser(request);
     }
 
-    @GetMapping("/user") // user 반환
+
+    @GetMapping("/user")
     public List<UserResponse> getUsers() {
         return userService.getUsers();
     }
 
     @PutMapping("/user")
-    public void updateUser(@RequestBody UserUpdateReq request) {
+    public void updateUser(@RequestBody UserUpdateRequest request) {
         userService.updateUser(request);
     }
 
+
     @DeleteMapping("/user")
     public void deleteUser(@RequestParam String name) {
+
         userService.deleteUser(name);
-
     }
-
 }

@@ -1,12 +1,10 @@
-package com.group.libraryapp.dto.user;
-
+package com.group.libraryapp.dto.request;
 
 import lombok.Getter;
 
 @Getter
-public class UserUpdateReq {
+public class UserUpdateRequest {
 
     private long id;
     private String name;
-
 }
