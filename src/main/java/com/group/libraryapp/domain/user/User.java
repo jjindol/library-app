@@ -1,10 +1,18 @@
-package com.group.libraryapp.domain;
+package com.group.libraryapp.domain.user;
 
 import lombok.Getter;
 
+import javax.persistence.*;
+
+@Entity
 @Getter
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 20) // name varchar(20)
     private String name;
     private Integer age;
 
@@ -14,5 +22,13 @@ public class User {
         }
         this.name = name;
         this.age = age;
+    }
+
+    protected User() {
+
+    }
+
+    public void updateName(String name) {
+        this.name = name;
     }
 }

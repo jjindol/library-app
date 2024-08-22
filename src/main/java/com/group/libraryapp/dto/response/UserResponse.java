@@ -1,6 +1,7 @@
 package com.group.libraryapp.dto.response;
 
-import com.group.libraryapp.domain.User;
+import com.group.libraryapp.domain.user.User;
+import com.group.libraryapp.domain.user.UserRepository;
 import lombok.Getter;
 
 @Getter
@@ -17,6 +18,12 @@ public class UserResponse {
 
     public UserResponse(long id, User user) {
         this.id = id;
+        this.name = user.getName();
+        this.age = user.getAge();
+    }
+
+    public UserResponse(User user) {
+        this.id = user.getId();
         this.name = user.getName();
         this.age = user.getAge();
     }

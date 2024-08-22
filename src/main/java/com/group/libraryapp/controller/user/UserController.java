@@ -3,8 +3,7 @@ package com.group.libraryapp.controller.user;
 import com.group.libraryapp.dto.request.UserCreateRequest;
 import com.group.libraryapp.dto.request.UserUpdateRequest;
 import com.group.libraryapp.dto.response.UserResponse;
-import com.group.libraryapp.service.UserService;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.group.libraryapp.service.user.UserServiceV1;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,10 +11,10 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceV1 userService;
 
-    public UserController(JdbcTemplate jdbcTemplate) {
-        this.userService = new UserService(jdbcTemplate);
+    public UserController(UserServiceV1 userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/user")
