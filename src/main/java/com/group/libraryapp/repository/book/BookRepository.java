@@ -1,8 +1,8 @@
 package com.group.libraryapp.repository.book;
 
-import org.springframework.stereotype.Repository;
+import com.group.libraryapp.domain.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface BookRepository {
-    void saveBook();
+public interface BookRepository extends JpaRepository<Book, Long> {
+
 }

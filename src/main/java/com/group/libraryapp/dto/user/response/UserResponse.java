@@ -1,7 +1,6 @@
-package com.group.libraryapp.dto.response;
+package com.group.libraryapp.dto.user.response;
 
-import com.group.libraryapp.domain.user.User;
-import com.group.libraryapp.domain.user.UserRepository;
+import com.group.libraryapp.domain.User;
 import lombok.Getter;
 
 @Getter

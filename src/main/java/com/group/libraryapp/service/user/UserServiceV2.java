@@ -1,14 +1,17 @@
 package com.group.libraryapp.service.user;
 
-import com.group.libraryapp.domain.user.User;
-import com.group.libraryapp.domain.user.UserRepository;
-import com.group.libraryapp.dto.request.UserCreateRequest;
-import com.group.libraryapp.dto.request.UserUpdateRequest;
-import com.group.libraryapp.dto.response.UserResponse;
+import com.group.libraryapp.domain.User;
+import com.group.libraryapp.repository.user.UserRepository;
+import com.group.libraryapp.dto.user.request.UserCreateRequest;
+import com.group.libraryapp.dto.user.request.UserUpdateRequest;
+import com.group.libraryapp.dto.user.response.UserResponse;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UserServiceV2 {
 
     private final UserRepository userRepository;
@@ -17,10 +20,12 @@ public class UserServiceV2 {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public void saveUser(UserCreateRequest request) {
         userRepository.save(new User(request.getName(), request.getAge()));
     }
 
+    @Transactional
     public List<UserResponse> getUsers() {
         List<User> users = userRepository.findAll();
         return users.stream()
@@ -28,11 +33,19 @@ public class UserServiceV2 {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void updateUser(UserUpdateRequest request) {
         User user = userRepository.findById(request.getId())
                 .orElseThrow(IllegalArgumentException::new);
 
         user.updateName(request.getName());
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void deleteUser(String name) {
+         User user = userRepository.findByName(name).orElseThrow(IllegalArgumentException::new);
+
+        userRepository.delete(user);
     }
 }

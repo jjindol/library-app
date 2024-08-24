@@ -7,9 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class UserConfiguration {
-
-    @Bean
-    public UserJdbcRepository userRepository(JdbcTemplate jdbcTemplate) {
-        return new UserJdbcRepository(jdbcTemplate);
+//
+//    @Bean
+//    public UserJdbcRepository userRepository(JdbcTemplate jdbcTemplate) {
+//        return new UserJdbcRepository(jdbcTemplate);
     }
-}
+//}
