@@ -1,8 +1,14 @@
 package com.group.libraryapp.service.book;
 
 import com.group.libraryapp.domain.Book;
+import com.group.libraryapp.domain.User;
+import com.group.libraryapp.domain.UserLoanHistory;
 import com.group.libraryapp.dto.book.request.BookCreateRequest;
+import com.group.libraryapp.dto.book.request.BookLoanRequest;
+import com.group.libraryapp.dto.book.request.BookReturnRequest;
 import com.group.libraryapp.repository.book.BookRepository;
+import com.group.libraryapp.repository.user.UserLoanHistoryRepository;
+import com.group.libraryapp.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,13 +16,47 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final UserLoanHistoryRepository userLoanHistoryRepository;
+    private final UserRepository userRepository;
 
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, UserLoanHistoryRepository userLoanHistoryRepository, UserRepository userRepository) {
         this.bookRepository = bookRepository;
+        this.userLoanHistoryRepository = userLoanHistoryRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
     public void saveBook(BookCreateRequest request) {
         bookRepository.save(new Book(request.getName()));
+    }
+
+    @Transactional
+    public void loanBook(BookLoanRequest request) {
+        Book book = bookRepository.findByName(request.getBookName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        if (userLoanHistoryRepository.existsByBookNameAndIsReturn(book.getName(), false)) {
+            throw new IllegalArgumentException("대출되어 있는 책입니다.");
+        }
+
+        User user = userRepository.findByName(request.getUserName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        userLoanHistoryRepository.save(new UserLoanHistory(user.getId(), book.getName()));
+
+    }
+
+    @Transactional
+    public void returnBook(BookReturnRequest request) {
+        User user = userRepository.findByName(request.getUserName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        UserLoanHistory history = userLoanHistoryRepository.findByUserIdAndBookName(user.getId(), request.getBookName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        history.doReturn();
+        //생략 가능: 영속성 컨텍스트가 변경 감지
+        userLoanHistoryRepository.save(history);
+
     }
 }
