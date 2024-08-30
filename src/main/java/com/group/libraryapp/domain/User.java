@@ -3,6 +3,8 @@ package com.group.libraryapp.domain;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,6 +17,9 @@ public class User {
     @Column(nullable = false, length = 20) // name varchar(20)
     private String name;
     private Integer age;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserLoanHistory> histories = new ArrayList<>();
 
     public User(String name, Integer age) {
         if (name == null || name.isBlank()) {
