@@ -1,8 +1,11 @@
 package com.group.libraryapp.domain;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
 public class UserLoanHistory {
 
     @Id
