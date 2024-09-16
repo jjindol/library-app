@@ -20,10 +20,12 @@ public class UserServiceV2 {
         this.userRepository = userRepository;
     }
 
+
     @Transactional
     public void saveUser(UserCreateRequest request) {
         userRepository.save(new User(request.getName(), request.getAge()));
     }
+
 
     @Transactional
     public List<UserResponse> getUsers() {
@@ -33,6 +35,7 @@ public class UserServiceV2 {
                 .collect(Collectors.toList());
     }
 
+
     @Transactional
     public void updateUser(UserUpdateRequest request) {
         User user = userRepository.findById(request.getId())
@@ -41,6 +44,7 @@ public class UserServiceV2 {
         user.updateName(request.getName());
         userRepository.save(user);
     }
+
 
     @Transactional
     public void deleteUser(String name) {

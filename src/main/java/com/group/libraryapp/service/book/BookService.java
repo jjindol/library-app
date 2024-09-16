@@ -25,10 +25,12 @@ public class BookService {
         this.userRepository = userRepository;
     }
 
+
     @Transactional
     public void saveBook(BookCreateRequest request) {
         bookRepository.save(new Book(request.getName()));
     }
+
 
     @Transactional
     public void loanBook(BookLoanRequest request) {
@@ -43,8 +45,8 @@ public class BookService {
                 .orElseThrow(IllegalArgumentException::new);
 
         user.loanBook(book.getName());
-
     }
+
 
     @Transactional
     public void returnBook(BookReturnRequest request) {
